@@ -1,12 +1,23 @@
-import { useState } from 'react'
+import { HashRouter as Router } from 'react-router-dom'
+import { Route,Routes } from 'react-router-dom'
+import { React } from 'react'
+import { AppHeader } from './cmps/AppHeader.jsx'
+import { Home } from './pages/Home.jsx'
+import { ToyIndex } from './pages/ToyIndex.jsx'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1>Mister Toy</h1>
-    </>
+    <Router>
+      <AppHeader />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/toy" element={<ToyIndex />} />
+        </Routes>
+      </main>
+    </Router>
   )
 }
 

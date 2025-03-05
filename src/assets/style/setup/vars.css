@@ -1,0 +1,15 @@
+:root {
+  --clr1: rgb(42, 76, 96);  /* Deep Slate Blue */
+  --clr2: rgb(155, 81, 92); /* Muted Rose */
+
+  --clr1bg: rgb(212, 226, 235); /* Soft Sky */
+  --clr1bg-light: rgb(232, 244, 252); /* Very Light Sky */
+  --clr2bg: rgb(250, 215, 221); /* Pastel Rose */
+  --clr2bg-light: rgb(255, 240, 243); /* Soft Blush */
+
+  --gray1: rgb(245, 245, 245); /* Lightest Gray */
+  --gray2: rgb(180, 180, 180); /* Neutral Gray */
+  --gray3: rgb(50, 50, 50); /* Dark Gray */
+
+  --active-link: rgb(220, 165, 50);
+}

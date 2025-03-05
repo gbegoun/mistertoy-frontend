@@ -1,0 +1,35 @@
+.app-header {
+    background-color: var(--clr1);
+    color: var(--clr2bg-light);
+    height: 50px;
+}
+
+.header-container {
+    position: relative;
+}
+
+.header-container h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.app-nav {
+    display: flex;
+    gap: 15px;
+    position: absolute;
+    bottom:0;
+    left:0;
+}
+
+a.active {
+    color: var(--active-link);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+@media (max-width: 720px) {
+    .app-header {
+        color: var(--clr2bg-light);
+    }
+}
