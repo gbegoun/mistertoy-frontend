@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate,Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { loadToys, removeToy, setFilterBy } from '../store/actions/toy.action.js'
@@ -10,6 +10,8 @@ export function ToyIndex() {
 
     const location = useLocation();
     const navigate = useNavigate();
+
+    const isModal = location.state && location.state.modal===true
 
     const toys = useSelector(state => state.toyModule.toys) || [];
     const isLoading = useSelector(state => state.toyModule.isLoading);
@@ -25,18 +27,22 @@ export function ToyIndex() {
             .catch(err => showErrorMsg('Cannot load toys'));
     }, [location.search]);
 
-    function onRemoveToy(toyId) { // should i use dispatch??
+    const closeModal = () => {
+        navigate(`/book`, { state: { modal: false }})
+    };
+
+    const onRemoveToy = (toyId) => {
         removeToy(toyId)
             .then(() => showSuccessMsg('Toy removed'))
             .catch(err => showErrorMsg('Cannot remove toy'));
-    }
+    };
 
-    function onSetFilterBy(filterBy) { 
+    const onSetFilterBy = (filterBy) => {
         const searchParams = new URLSearchParams();
         if (filterBy.name) searchParams.set('name', filterBy.name);
         if (filterBy.maxPrice) searchParams.set('maxPrice', filterBy.maxPrice);
         navigate({ search: searchParams.toString() });
-    }
+    };
 
     if (isLoading) return <div>Loading...</div>;
     return (
@@ -44,6 +50,13 @@ export function ToyIndex() {
             <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             <Link to="/toy/edit" >Add Toy</Link>
             <ToyList toys={toys} onRemoveToy={onRemoveToy} />
+            {/* {isModal && (
+                <div className="overlay" onClick={closeModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <Outlet />
+                    </div>
+                </div>
+            )} */}
         </section>
     );
 
