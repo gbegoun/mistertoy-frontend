@@ -1,25 +1,33 @@
 .app-header {
     background-color: var(--clr1);
     color: var(--clr2bg-light);
-    height: 50px;
+    height: 75px;
 }
 
 .header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     position: relative;
 }
 
 .header-container h1 {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -100%);
+    font-size: 2rem;
 }
 
 .app-nav {
     display: flex;
-    gap: 15px;
     position: absolute;
-    bottom:0;
-    left:0;
+    gap: 5px;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
 }
 
 a.active {

@@ -1,4 +1,3 @@
-// import { UserMsg } from "./UserMsg.jsx"
 import { NavLink } from "react-router-dom"
 
 export function AppHeader() {
@@ -12,7 +11,6 @@ export function AppHeader() {
                 </nav>
                 <h1>Mister Toy App</h1>
             </section>
-            {/* <UserMsg/> */}
         </header>
     )
 }

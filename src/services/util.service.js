@@ -1,10 +1,4 @@
-export const utilService = {
-    makeId,
-    loadFromStorage,
-    saveToStorage,
-}
-
-function makeId(length = 6) {
+export function makeId(length = 6) {
     var txt = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
@@ -16,11 +10,21 @@ function makeId(length = 6) {
 }
 
 
-function saveToStorage(key, value) {
+export function saveToStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value))
 }
 
-function loadFromStorage(key) {
+export function loadFromStorage(key) {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
+}
+
+export function debounce(func, delay=500){
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    }
 }
