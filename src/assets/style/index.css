@@ -11,9 +11,12 @@
 
 /* Pages */
 @import "./pages/ToyIndex.css";
+
 /* Components */
 @import "./cmps/app.css";
 @import "./cmps/AppHeader.css";
 @import "./cmps/ToyList.css";
 @import "./cmps/ToyPreview.css";
+@import "./cmps/ToyDetails.css";
 @import "./cmps/UserMsg.css";
+@import "./cmps/Modal.css"

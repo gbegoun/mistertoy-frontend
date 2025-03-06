@@ -62,96 +62,99 @@ function _createToys() {
   if (!toys || !toys.length) {
     toys = [
       {
-        "_id": 1,
+        "_id": "1",
         "name": "ZoomRacer 3000",
         "price": 199,
         "labels": ["toy", "fast", "remote control", "battery-powered"],
         "inStock": true,
-        "imgUrl":  "https://picsum.photos/200/300",
+        "img":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
-        "_id": 2,
+        "_id": "2",
         "name": "Fluffo the Cuddly Bear",
         "price": 49,
         "labels": ["plush", "soft", "cuddly", "stuffed animal"],
         "inStock": false,
-        "imgUrl":  "https://picsum.photos/200/300",
+        "img":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
-        "_id": 3,
+        "_id": "3",
         "name": "RoboZap",
         "price": 350,
         "labels": ["robot", "interactive", "lights", "sound effects", "AI"],
         "inStock": true,
-        "imgUrl":  "https://picsum.photos/200/300",
+        "img":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
-        "_id": 4,
+        "_id": "4",
         "name": "GiggleBlocks",
         "price": 89,
         "labels": ["building", "colorful", "educational", "stacking"],
         "inStock": true,
-        "imgUrl":  "https://picsum.photos/200/300",
+        "img":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
-        "_id": 5,
+        "_id": "5",
         "name": "SkyGlider Drone",
         "price": 599,
         "labels": ["drone", "aerial", "camera", "remote control", "flying"],
         "inStock": false,
-        "imgUrl":  "https://picsum.photos/200/300",
+        "img":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
-        "_id": 6,
+        "_id": "6",
         "name": "MagicDoodle Pad",
         "price": 35,
         "labels": ["drawing", "kids", "educational", "creative", "fun"],
         "inStock": true,
-        "imgUrl":  "https://picsum.photos/200/300",
+        "img":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
-        "_id": 7,
+        "_id": "7",
         "name": "BattleBots Arena",
         "price": 275,
         "labels": ["robots", "battle", "remote control", "strategy"],
         "inStock": true,
-        "imgUrl":  "https://picsum.photos/200/300",
+        "img":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
-        "_id": 8,
+        "_id": "8",
         "name": "Superhero Action Set",
         "price": 120,
         "labels": ["action figure", "heroes", "collectible", "poseable"],
         "inStock": false,
-        "imgUrl":  "https://picsum.photos/200/300",
+        "img":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
-        "_id": 9,
+        "_id": "9",
         "name": "Fantasy Castle Playset",
         "price": 450,
         "labels": ["castle", "figures", "fantasy", "roleplay"],
         "inStock": true,
-        "imgUrl":  "https://picsum.photos/200/300",
+        "img":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
-        "_id": 10,
+        "_id": "10",
         "name": "SpeedBoat Racer",
         "price": 375,
         "labels": ["boat", "waterproof", "remote control", "fast", "racing"],
         "inStock": false,
-        "imgUrl":  "https://picsum.photos/200/300",
+        "img":  "https://picsum.photos/200/300",
         "createdAt": 0
       }
-    ]
+    ].map(toy => ({
+      ...toy,
+      img: `https://picsum.photos/id/${toy._id*9+1}/200/300` // Unique image per toy
+  }));
 
     saveToStorage(TOY_KEY, toys)
   }
@@ -160,11 +163,11 @@ function _createToys() {
 function _setNextPrevToyId(toy) {
   return storageService.query(TOY_KEY)
     .then((toys) => {
-      const toyIdx = toys.findIndex((currToy) => currToy.id === toy.id)
+      const toyIdx = toys.findIndex((currToy) => currToy._id === toy._id)
       const nextToy = toys[toyIdx + 1] ? toys[toyIdx + 1] : toys[0]
       const prevToy = toys[toyIdx - 1] ? toys[toyIdx - 1] : toys[toys.length - 1]
-      toy.nextToyId = nextToy.id
-      toy.prevToyId = prevToy.id
+      toy.nextToyId = nextToy._id
+      toy.prevToyId = prevToy._id
       return toy
     })
 }
