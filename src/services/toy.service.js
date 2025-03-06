@@ -67,7 +67,7 @@ function _createToys() {
         "price": 199,
         "labels": ["toy", "fast", "remote control", "battery-powered"],
         "inStock": true,
-        "imgUrl": "place-holder",
+        "imgUrl":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
@@ -76,7 +76,7 @@ function _createToys() {
         "price": 49,
         "labels": ["plush", "soft", "cuddly", "stuffed animal"],
         "inStock": false,
-        "imgUrl": "place-holder",
+        "imgUrl":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
@@ -85,7 +85,7 @@ function _createToys() {
         "price": 350,
         "labels": ["robot", "interactive", "lights", "sound effects", "AI"],
         "inStock": true,
-        "imgUrl": "place-holder",
+        "imgUrl":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
@@ -94,7 +94,7 @@ function _createToys() {
         "price": 89,
         "labels": ["building", "colorful", "educational", "stacking"],
         "inStock": true,
-        "imgUrl": "place-holder",
+        "imgUrl":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
@@ -103,7 +103,7 @@ function _createToys() {
         "price": 599,
         "labels": ["drone", "aerial", "camera", "remote control", "flying"],
         "inStock": false,
-        "imgUrl": "place-holder",
+        "imgUrl":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
@@ -112,7 +112,7 @@ function _createToys() {
         "price": 35,
         "labels": ["drawing", "kids", "educational", "creative", "fun"],
         "inStock": true,
-        "imgUrl": "place-holder",
+        "imgUrl":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
@@ -121,7 +121,7 @@ function _createToys() {
         "price": 275,
         "labels": ["robots", "battle", "remote control", "strategy"],
         "inStock": true,
-        "imgUrl": "place-holder",
+        "imgUrl":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
@@ -130,7 +130,7 @@ function _createToys() {
         "price": 120,
         "labels": ["action figure", "heroes", "collectible", "poseable"],
         "inStock": false,
-        "imgUrl": "place-holder",
+        "imgUrl":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
@@ -139,7 +139,7 @@ function _createToys() {
         "price": 450,
         "labels": ["castle", "figures", "fantasy", "roleplay"],
         "inStock": true,
-        "imgUrl": "place-holder",
+        "imgUrl":  "https://picsum.photos/200/300",
         "createdAt": 0
       },
       {
@@ -148,7 +148,7 @@ function _createToys() {
         "price": 375,
         "labels": ["boat", "waterproof", "remote control", "fast", "racing"],
         "inStock": false,
-        "imgUrl": "place-holder",
+        "imgUrl":  "https://picsum.photos/200/300",
         "createdAt": 0
       }
     ]

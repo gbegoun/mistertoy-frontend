@@ -2,9 +2,9 @@ export function ToyPreview({ toy, onRemoveToy }) {
     return (
         <div className="toy-preview">
             <h2>{toy.name}</h2>
-            <img src={toy.img} alt="" />
+            <img src={`${toy.imgUrl}?random=${Math.random()}`} alt="" />
             <p>Price: {toy.price}</p>
-            <input type="button" value="Remove" onClick={() => onRemoveToy(toy._id)} />
+            <button onClick={() => onRemoveToy(toy._id)} >Remove</button>
         </div>
     )
 }

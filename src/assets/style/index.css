@@ -9,6 +9,8 @@
 @import "base/layout.css";
 @import "base/forms.css";
 
+/* Pages */
+@import "./pages/ToyIndex.css";
 /* Components */
 @import "./cmps/app.css";
 @import "./cmps/AppHeader.css";
