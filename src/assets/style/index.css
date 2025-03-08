@@ -19,4 +19,5 @@
 @import "./cmps/ToyPreview.css";
 @import "./cmps/ToyDetails.css";
 @import "./cmps/UserMsg.css";
-@import "./cmps/Modal.css"
+@import "./cmps/Modal.css";
+@import "./cmps/Popup.css";
