@@ -17,6 +17,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/toy" element={<ToyIndex />}>
             <Route path="/toy/:toyId" element={<ToyDetails />} />
+            <Route path="/toy/edit" element={<ToyDetails />} />
           </Route>
         </Routes>
       </main>

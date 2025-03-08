@@ -9,6 +9,7 @@
     font-size: 1em;
     opacity: 0; 
     animation: fadeIn 0.5s forwards, fadeOut 0.5s forwards 2.5s; 
+    z-index: 1000;
 }
 
 .user-msg.success {

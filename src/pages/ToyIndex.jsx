@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams, Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux'
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
-import { loadToys, removeToy, setFilterBy } from '../store/actions/toy.action.js'
-import { ToyList } from '../cmps/ToyList.jsx'
-import { ToyFilter } from '../cmps/ToyFilter.jsx'
-import { Modal } from '../cmps/Modal.jsx'
+import { useSelector } from 'react-redux';
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
+import { loadToys, removeToy, setFilterBy } from '../store/actions/toy.action.js';
+import { ToyList } from '../cmps/ToyList.jsx';
+import { ToyFilter } from '../cmps/ToyFilter.jsx';
+import { Modal } from '../cmps/Modal.jsx';
 import { ToyDetails } from '../cmps/ToyDetails.jsx';
 
 export function ToyIndex() {
@@ -22,7 +22,8 @@ export function ToyIndex() {
         maxPrice: searchParmas.get('maxPrice') || ''
     };
 
-    const isModal = location.state && location.state.modal === true
+    const isModal = location.state && location.state.modal === true;
+    const { toyId } = useParams();
 
     useEffect(() => {
         loadToys(filterBy)
@@ -30,7 +31,7 @@ export function ToyIndex() {
     }, [location.search]);
 
     const closeModal = () => {
-        navigate(`/toy`, { state: { modal: false } })
+        navigate(`/toy`, { state: { modal: false } });
     };
 
     const onRemoveToy = (toyId) => {
@@ -47,15 +48,15 @@ export function ToyIndex() {
     };
 
     if (isLoading) return <div>Loading...</div>;
-
+    if (!isModal && toyId) return <Outlet />;
     return (
         <section className="toy-index">
             <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-            <Link to="/toy/edit" >Add Toy</Link>
+            <Link to="/toy/edit" state={{ modal: true }}>Add Toy</Link>
             <ToyList toys={toys} onRemoveToy={onRemoveToy} />
             {isModal && (
                 <Modal onClose={closeModal}>
-                    <Outlet/>
+                    <Outlet />
                 </Modal>
             )}
         </section>

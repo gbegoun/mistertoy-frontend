@@ -2,6 +2,8 @@
     display: grid;
     grid-template-rows: subgrid;
     grid-row: span 4;
+    padding-left: 10px;
+    padding-right: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     
 }

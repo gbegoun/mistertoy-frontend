@@ -1,5 +1,54 @@
 .toy-details {
     position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+}
+
+.toy-details h1 {
+    text-align: center;
+}
+
+.toy-details input {
+    all: inherit;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 4px;
+    transition: all 0.2s ease-in-out;
+    cursor: text;
+    border-bottom: 2px solid #007bff;
+    background: rgba(0, 123, 255, 0.1)
+}
+
+.toy-details form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toy-details input {
+    appearance: textfield;
+}
+
+.toy-details input[readonly] {
+    all: inherit;
+    transition: all 0.2s ease-in-out;
+    caret-color: transparent;
+    text-decoration: none;
+    appearance: textfield;
+}
+
+
+.toy-details .edit-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.toy-details h5 {
+    width: 100%;
 }

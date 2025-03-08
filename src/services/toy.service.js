@@ -1,8 +1,8 @@
-import { storageService } from './async-storage.service.js'
-import { saveToStorage, loadFromStorage } from './util.service.js'
+import { storageService } from './async-storage.service.js';
+import { saveToStorage, loadFromStorage } from './util.service.js';
 
-const TOY_KEY = 'toyDB'
-_createToys()
+const TOY_KEY = 'toyDB';
+_createToys();
 
 export const toyService = {
   query,
@@ -10,55 +10,66 @@ export const toyService = {
   remove,
   save,
   getDefaultFilter,
-}
+  getEmptyToy,
+};
 
 // For Debug (easy access from console):
-window.ts = toyService
-
+window.ts = toyService;
 
 function query(filterBy = {}) {
   return storageService.query(TOY_KEY)
     .then(toys => {
       if (filterBy.name) {
-        const regExp = new RegExp(filterBy.name, 'i')
-        toys = toys.filter(toy => regExp.test(toy.name))
+        const regExp = new RegExp(filterBy.name, 'i');
+        toys = toys.filter(toy => regExp.test(toy.name));
       }
       if (filterBy.minPrice) {
-        toys = toys.filter(toy => toy.price >= filterBy.minPrice)
+        toys = toys.filter(toy => toy.price >= filterBy.minPrice);
       }
       if (filterBy.maxPrice) {
-        toys = toys.filter(toy => toy.price <= filterBy.maxPrice)
+        toys = toys.filter(toy => toy.price <= filterBy.maxPrice);
       }
-      return toys
-    })
+      return toys;
+    });
 }
 
 function get(toyId) {
   return storageService.get(TOY_KEY, toyId)
     .then(toy => {
-      toy = _setNextPrevToyId(toy)
-      return toy
-    })
+      toy = _setNextPrevToyId(toy);
+      return toy;
+    });
 }
 
 function remove(toyId) {
-  return storageService.remove(TOY_KEY, toyId)
+  return storageService.remove(TOY_KEY, toyId);
 }
 
 function save(toy) {
-  if (toy.id) {
-    return storageService.put(TOY_KEY, toy)
+  if (toy._id) {
+    return storageService.put(TOY_KEY, toy);
   } else {
-    return storageService.post(TOY_KEY, toy)
+    return storageService.post(TOY_KEY, toy);
   }
 }
 
 function getDefaultFilter() {
-  return { name: '', maxPrice: '' }
+  return { name: '', maxPrice: '' };
+}
+
+function getEmptyToy() {
+  return {
+    name: '',
+    price: '',
+    labels: [],
+    inStock: true,
+    img: `https://picsum.photos/id/${Math.floor(Math.random() * 91) + 10}/200/300`,
+    createdAt: Date.now()
+  };
 }
 
 function _createToys() {
-  let toys = loadFromStorage(TOY_KEY)
+  let toys = loadFromStorage(TOY_KEY);
   if (!toys || !toys.length) {
     toys = [
       {
@@ -126,6 +137,7 @@ function _createToys() {
       },
       {
         "_id": "8",
+        
         "name": "Superhero Action Set",
         "price": 120,
         "labels": ["action figure", "heroes", "collectible", "poseable"],
@@ -154,21 +166,21 @@ function _createToys() {
     ].map(toy => ({
       ...toy,
       img: `https://picsum.photos/id/${toy._id*9+1}/200/300` // Unique image per toy
-  }));
-
-    saveToStorage(TOY_KEY, toys)
+    }));
+    
+    saveToStorage(TOY_KEY, toys);
   }
 }
+
 
 function _setNextPrevToyId(toy) {
   return storageService.query(TOY_KEY)
     .then((toys) => {
-      const toyIdx = toys.findIndex((currToy) => currToy._id === toy._id)
-      const nextToy = toys[toyIdx + 1] ? toys[toyIdx + 1] : toys[0]
-      const prevToy = toys[toyIdx - 1] ? toys[toyIdx - 1] : toys[toys.length - 1]
-      toy.nextToyId = nextToy._id
-      toy.prevToyId = prevToy._id
-      return toy
-    })
+      const toyIdx = toys.findIndex((currToy) => currToy._id === toy._id);
+      const nextToy = toys[toyIdx + 1] ? toys[toyIdx + 1] : toys[0];
+      const prevToy = toys[toyIdx - 1] ? toys[toyIdx - 1] : toys[toys.length - 1];
+      toy.nextToyId = nextToy._id;
+      toy.prevToyId = prevToy._id;
+      return toy;
+    });
 }
-
