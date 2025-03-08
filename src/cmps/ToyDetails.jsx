@@ -63,7 +63,7 @@ export function ToyDetails() {
     return (
         <section className="toy-details">
             <form onSubmit={handleSubmit}>
-                <button type="button" onClick={onEditClicked} className="edit-btn">{isEditMode ? "Back" : "Cacnel"}</button>
+                <button type="button" onClick={onEditClicked} className="edit-btn">{isEditMode ? "Cancel" : "Edit"}</button>
                 <h1>
                     <input
                         type="text"
