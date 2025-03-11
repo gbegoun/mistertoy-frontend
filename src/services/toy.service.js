@@ -17,6 +17,7 @@ export const toyService = {
 window.ts = toyService;
 
 function query(filterBy = {}) {
+  console.log('toyService -> query -> filterBy', filterBy);
   return storageService.query(TOY_KEY)
     .then(toys => {
       if (filterBy.name) {
@@ -28,6 +29,9 @@ function query(filterBy = {}) {
       }
       if (filterBy.maxPrice) {
         toys = toys.filter(toy => toy.price <= filterBy.maxPrice);
+      }
+      if (filterBy.labels && filterBy.labels.length) {
+        toys = toys.filter(toy => filterBy.labels.every(label => toy.labels.includes(label)));
       }
       return toys;
     });

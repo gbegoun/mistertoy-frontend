@@ -11,6 +11,30 @@
     text-align: center;
 }
 
+.toy-details h5 {
+    width: 100%;
+}
+
+.toy-details .edit-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.toy-details .chat-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 50px;
+}
+
+.toy-details form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .toy-details input {
     all: inherit;
     text-decoration: none;
@@ -21,17 +45,8 @@
     transition: all 0.2s ease-in-out;
     cursor: text;
     border-bottom: 2px solid #007bff;
-    background: rgba(0, 123, 255, 0.1)
-}
-
-.toy-details form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.toy-details input {
     appearance: textfield;
+    background: rgba(0, 123, 255, 0.1);
 }
 
 .toy-details input[readonly] {
@@ -40,15 +55,4 @@
     caret-color: transparent;
     text-decoration: none;
     appearance: textfield;
-}
-
-
-.toy-details .edit-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.toy-details h5 {
-    width: 100%;
 }

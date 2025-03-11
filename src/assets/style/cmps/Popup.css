@@ -5,6 +5,8 @@
     transform: translate(-50%, -50%);
     width: 300px;
     box-shadow: 5px 5px 10px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    background-color: white;
 }
 
 .popup .close {
@@ -12,5 +14,10 @@
     top: 0;
     right: 0;
     padding: 10px;
+    height: 25px;
+    width: 25px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     cursor: pointer;
 }

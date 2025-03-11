@@ -1,46 +1,96 @@
 import { debounce } from "../services/util.service.js"
+import { toyService} from "../services/toy.service.js";
 import { useState, useRef, useEffect } from 'react';
+import { TextField, Slider, Typography, Box, Select, MenuItem } from '@mui/material';
 
-export function ToyFilter({ filterBy, onSetFilterBy }) {
+export function ToyFilter({ filterBy, onSetFilterBy, labels }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy);
-
     onSetFilterBy = useRef(debounce(onSetFilterBy)).current;
 
     useEffect(() => {
         onSetFilterBy(filterByToEdit);
     }, [filterByToEdit]);
 
-    function handleChange(ev) {
-        let { value, name: field, type } = ev.target;
-        value = type === 'number' ? +value : value;
-        setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }));
+    function handleChange(event, newValue) {
+        const { name, type } = event.target;
+        console.log(event.target);
+        if (type === "text") {
+            setFilterByToEdit(prev => ({
+                ...prev,
+                [name]: event.target.value
+            }));
+        }
+        switch (name) {
+            case "labels":
+            setFilterByToEdit(prev => ({
+                ...prev,
+                labels: event.target.value
+            }));
+            break;
+
+            case "priceRange":
+            setFilterByToEdit(prev => ({
+                ...prev,
+                minPrice: newValue[0],
+                maxPrice: newValue[1]
+            }));
+
+            default:
+            break;
+        }
     }
 
     return (
-        <section className="toy-filter full main-layout">
+        <section className="toy-filter">
             <h2>Toys Filter</h2>
-            <form >
-                <label htmlFor="name">Name:</label>
-                <input type="text"
-                    id="name"
-                    name="name"
-                    placeholder="By name"
-                    value={filterByToEdit.name}
-                    onChange={handleChange}
-                />
+            <div className="filter-actions">
+                <Box width={200}>
+                    <Typography gutterBottom>
+                        Name:
+                    </Typography>
+                    <TextField
+                        className="filter-input"
+                        name="name"
+                        value={filterByToEdit.name}
+                        onChange={handleChange}
+                        valueLabelDisplay="auto"
+                    />
+                </Box>
+                <Box width={200}>
+                    <Typography gutterBottom>
+                        Max price:
+                    </Typography>
+                    <Slider
+                        name="priceRange"
+                        value={[filterByToEdit.minPrice || 0, filterByToEdit.maxPrice || 1000]}
+                        onChange={handleChange}
+                        valueLabelDisplay="auto"
+                        min={0}
+                        max={1000}
+                    />
+                </Box>
 
+                <Box width={200}>
+                    <Typography gutterBottom>
+                        Tags:
+                    </Typography>
+                    <Select sx={{width:200}}
+                        multiple
+                        name="labels"
+                        value={filterByToEdit.labels || []}
+                        onChange={handleChange}
 
-                <label htmlFor="maxPrice">Max price:</label>
-                <input type="number"
-                    id="maxPrice"
-                    name="maxPrice"
-                    placeholder="By max price"
-                    value={filterByToEdit.maxPrice || ''}
-                    onChange={handleChange}
-                />
-            </form>
-        </section>
+                    >
+                        {labels.map((label) => (
+                            <MenuItem key={label} value={label}>
+                                {label}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </Box>
+        </div>
+        </section >
     )
 }
 

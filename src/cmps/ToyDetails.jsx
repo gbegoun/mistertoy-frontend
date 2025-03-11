@@ -3,6 +3,8 @@ import { toyService } from "../services/toy.service";
 import { updateToy } from '../store/actions/toy.action.js';
 import { useEffect, useState } from "react";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
+import { Chat } from "./Chat.jsx";
+import { Popup } from "./Popup.jsx";
 
 export function ToyDetails() {
 
@@ -11,6 +13,11 @@ export function ToyDetails() {
     const [toy, setToy] = useState(null);
     const [isEditMode, setIsEditMode] = useState(false);
     const [isChanged, setIsChanged] = useState(false);
+    const [showChat, setShowChat] = useState(false);
+
+    function onChatClicked() {
+        setShowChat(true);
+    }
 
     useEffect(() => {
         toyService.get(toyId)
@@ -20,14 +27,15 @@ export function ToyDetails() {
 
     const handleChange = (ev) => {
         setIsChanged(true);
-        const { name, value } = ev.target;
+        const { name, value, type } = ev.target;
+        const updatedValue = type === 'number' ? +value : value;
         switch (name) {
             case 'tags':
-                const labels = value.split(',').map(label => label.trim());
+                const labels = updatedValue.split(',').map(label => label.trim());
                 setToy({ ...toy, labels });
                 break;
             default:
-                setToy({ ...toy, [name]: value });
+                setToy({ ...toy, [name]: updatedValue });
         }
     };
 
@@ -50,7 +58,7 @@ export function ToyDetails() {
                     setIsEditMode(false);
                 })
                 .catch(err => console.log('Cannot updated toy'));
-            
+
         }
     };
 
@@ -103,6 +111,8 @@ export function ToyDetails() {
                     </div>
                     : <button type="submit" disabled={!isChanged}>Save</button>}
             </form>
+            <button className="chat-button" onClick={onChatClicked}>Chat</button>
+            {showChat && <Popup title="chat" onClose={() => setShowChat(false)}> <Chat /> </Popup>}
         </section>
     );
 }

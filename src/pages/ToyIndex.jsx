@@ -6,7 +6,6 @@ import { loadToys, removeToy, setFilterBy } from '../store/actions/toy.action.js
 import { ToyList } from '../cmps/ToyList.jsx';
 import { ToyFilter } from '../cmps/ToyFilter.jsx';
 import { Modal } from '../cmps/Modal.jsx';
-import { ToyDetails } from '../cmps/ToyDetails.jsx';
 
 export function ToyIndex() {
 
@@ -19,7 +18,9 @@ export function ToyIndex() {
     const searchParmas = new URLSearchParams(location.search);
     const filterBy = {
         name: searchParmas.get('name') || '',
-        maxPrice: searchParmas.get('maxPrice') || ''
+        minPrice: searchParmas.get('minPrice') || '',
+        maxPrice: searchParmas.get('maxPrice') || '',
+        labels: searchParmas.getAll('labels') || []
     };
 
     const isModal = location.state && location.state.modal === true;
@@ -43,7 +44,9 @@ export function ToyIndex() {
     const onSetFilterBy = (filterBy) => {
         const searchParams = new URLSearchParams();
         if (filterBy.name) searchParams.set('name', filterBy.name);
+        if (filterBy.minPrice) searchParams.set('minPrice', filterBy.minPrice);
         if (filterBy.maxPrice) searchParams.set('maxPrice', filterBy.maxPrice);
+        if(filterBy.labels) filterBy.labels.forEach(label => searchParams.append('labels', label));
         navigate({ search: searchParams.toString() });
     };
 
@@ -51,7 +54,7 @@ export function ToyIndex() {
     if (!isModal && toyId) return <Outlet />;
     return (
         <section className="toy-index">
-            <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} labels={[...new Set(toys.flatMap(toy => toy.labels))]} />
             <Link to="/toy/edit" state={{ modal: true }}>Add Toy</Link>
             <ToyList toys={toys} onRemoveToy={onRemoveToy} />
             {isModal && (
@@ -61,5 +64,4 @@ export function ToyIndex() {
             )}
         </section>
     );
-
 }
