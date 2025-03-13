@@ -3,8 +3,6 @@ import { toyService } from "../services/toy.service";
 import { updateToy } from '../store/actions/toy.action.js';
 import { useEffect, useState } from "react";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
-import { Chat } from "./Chat.jsx";
-import { Popup } from "./Popup.jsx";
 
 export function ToyDetails() {
 
@@ -13,11 +11,7 @@ export function ToyDetails() {
     const [toy, setToy] = useState(null);
     const [isEditMode, setIsEditMode] = useState(false);
     const [isChanged, setIsChanged] = useState(false);
-    const [showChat, setShowChat] = useState(false);
 
-    function onChatClicked() {
-        setShowChat(true);
-    }
 
     useEffect(() => {
         toyService.get(toyId)
@@ -111,8 +105,6 @@ export function ToyDetails() {
                     </div>
                     : <button type="submit" disabled={!isChanged}>Save</button>}
             </form>
-            <button className="chat-button" onClick={onChatClicked}>Chat</button>
-            {showChat && <Popup title="chat" onClose={() => setShowChat(false)}> <Chat /> </Popup>}
         </section>
     );
 }

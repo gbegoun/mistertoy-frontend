@@ -1,3 +1,8 @@
+.chat-button {
+    position: fixed;
+    z-index: 2000;
+}
+
 .chat {
     display: grid;
     padding: 5px;
@@ -40,4 +45,14 @@
     padding: 5px;
     margin: 0;
     border-radius: 0;
+}
+
+.chat img{
+    position: relative;
+    object-fit: cover;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
