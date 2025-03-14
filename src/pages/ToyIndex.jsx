@@ -46,22 +46,25 @@ export function ToyIndex() {
         if (filterBy.name) searchParams.set('name', filterBy.name);
         if (filterBy.minPrice) searchParams.set('minPrice', filterBy.minPrice);
         if (filterBy.maxPrice) searchParams.set('maxPrice', filterBy.maxPrice);
-        if(filterBy.labels) filterBy.labels.forEach(label => searchParams.append('labels', label));
+        if (filterBy.labels) filterBy.labels.forEach(label => searchParams.append('labels', label));
         navigate({ search: searchParams.toString() });
     };
 
-    if (isLoading) return <div>Loading...</div>;
+
     if (!isModal && toyId) return <Outlet />;
     return (
         <section className="toy-index">
             <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} labels={[...new Set(toys.flatMap(toy => toy.labels))]} />
-            <Link to="/toy/edit" state={{ modal: true }}>Add Toy</Link>
-            <ToyList toys={toys} onRemoveToy={onRemoveToy} />
-            {isModal && (
-                <Modal onClose={closeModal}>
-                    <Outlet />
-                </Modal>
-            )}
+            {isLoading ? (<div>Loading...</div>) :
+                <>
+                    <Link to="/toy/edit" state={{ modal: true }}>Add Toy</Link>
+                    <ToyList toys={toys} onRemoveToy={onRemoveToy} />
+                    {isModal && (
+                        <Modal onClose={closeModal}>
+                            <Outlet />
+                        </Modal>
+                    )}
+                </>}
         </section>
     );
 }
